@@ -1,6 +1,6 @@
 <div align="center">
 
-# Advent of Code 2023
+# Advent of Code 2022
 My solutions in Rust!
 
 </div>
