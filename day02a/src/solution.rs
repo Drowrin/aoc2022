@@ -1,5 +1,3 @@
-use itertools::Itertools;
-
 enum RPS {
     Rock,
     Paper,
@@ -50,7 +48,9 @@ pub fn solution(input: &str) -> String {
     input
         .split("\n")
         .map(|line| {
-            let (them, me) = line.split(" ").map(RPS::from).collect_tuple().unwrap();
+            let mut shapes = line.split(" ").map(RPS::from);
+            let them = shapes.next().unwrap();
+            let me = shapes.next().unwrap();
             me.score(them)
         })
         .sum::<i32>()
