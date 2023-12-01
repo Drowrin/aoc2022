@@ -8,16 +8,19 @@ fn char_priority(c: char) -> i32 {
     }
 }
 
+fn parse_line(line: &str) -> Vec<i32> {
+    line.chars().map(char_priority).collect::<Vec<_>>()
+}
+
+fn find_misplaced(sack: Vec<i32>) -> i32 {
+    let (left, right) = sack.split_at(sack.len() / 2);
+    *left.iter().find(|item| right.contains(item)).unwrap()
+}
+
 pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
-        .map(|line| line.chars().map(char_priority).collect::<Vec<_>>())
-        .map(|sack| {
-            let size = sack.len() / 2;
-
-            let (left, right) = sack.split_at(size);
-
-            *left.iter().find(|item| right.contains(item)).unwrap()
-        })
+        .map(parse_line)
+        .map(find_misplaced)
         .sum::<i32>()
 }

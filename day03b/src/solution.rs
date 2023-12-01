@@ -1,3 +1,5 @@
+use itertools::Itertools;
+
 fn char_priority(c: char) -> i32 {
     let v = c as i32;
 
@@ -8,23 +10,25 @@ fn char_priority(c: char) -> i32 {
     }
 }
 
+fn parse_line(line: &str) -> Vec<i32> {
+    line.chars().map(char_priority).collect::<Vec<_>>()
+}
+
+fn find_badge(group: &[Vec<i32>]) -> i32 {
+    let (first, second, third) = group.iter().collect_tuple().unwrap();
+
+    *first
+        .iter()
+        .find(|item| second.contains(item) && third.contains(item))
+        .unwrap()
+}
+
 pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
-        .map(|line| line.chars().map(char_priority).collect::<Vec<_>>())
+        .map(parse_line)
         .collect::<Vec<_>>()
         .chunks(3)
-        .map(|group| {
-            let mut elves = group.iter();
-
-            let first = elves.next().unwrap();
-            let second = elves.next().unwrap();
-            let third = elves.next().unwrap();
-
-            *first
-                .iter()
-                .find(|item| second.contains(item) && third.contains(item))
-                .unwrap()
-        })
+        .map(find_badge)
         .sum::<i32>()
 }
