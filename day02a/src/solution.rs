@@ -44,7 +44,7 @@ impl RPS {
     }
 }
 
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
         .map(|line| {
@@ -54,5 +54,4 @@ pub fn solution(input: &str) -> String {
             me.score(them)
         })
         .sum::<i32>()
-        .to_string()
 }

@@ -1,4 +1,4 @@
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n\n")
         .map(|elf| {
@@ -8,5 +8,4 @@ pub fn solution(input: &str) -> String {
         })
         .max()
         .expect("Empty input!")
-        .to_string()
 }

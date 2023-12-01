@@ -16,11 +16,10 @@ fn check_overlap((left, right): &((i32, i32), (i32, i32))) -> bool {
     (left.0 <= right.1 && left.1 >= right.0) || (left.0 <= right.1 && left.1 >= right.0)
 }
 
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
         .map(parse_line)
         .filter(check_overlap)
         .count()
-        .to_string()
 }

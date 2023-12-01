@@ -8,7 +8,7 @@ fn char_priority(c: char) -> i32 {
     }
 }
 
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
         .map(|line| line.chars().map(char_priority).collect::<Vec<_>>())
@@ -20,5 +20,4 @@ pub fn solution(input: &str) -> String {
             *left.iter().find(|item| right.contains(item)).unwrap()
         })
         .sum::<i32>()
-        .to_string()
 }

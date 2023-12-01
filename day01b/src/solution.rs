@@ -1,4 +1,4 @@
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     let mut elves = input
         .split("\n\n")
         .map(|elf| {
@@ -10,5 +10,5 @@ pub fn solution(input: &str) -> String {
 
     elves.sort();
 
-    elves.into_iter().rev().take(3).sum::<i32>().to_string()
+    elves.into_iter().rev().take(3).sum::<i32>()
 }

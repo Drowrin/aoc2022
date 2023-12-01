@@ -71,7 +71,7 @@ fn score(their_shape: &str, result: &str) -> i32 {
     me.val() + result.val()
 }
 
-pub fn solution(input: &str) -> String {
+pub fn solution(input: &str) -> impl ToString {
     input
         .split("\n")
         .map(|line| {
@@ -81,5 +81,4 @@ pub fn solution(input: &str) -> String {
             score(their_shape, result)
         })
         .sum::<i32>()
-        .to_string()
 }

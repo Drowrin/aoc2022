@@ -6,7 +6,7 @@ mod tests {
     #[test]
     fn example() {
         assert_eq!(
-            solution::solution(include_str!("../data/example.txt")),
+            solution::solution(include_str!("../data/example.txt")).to_string(),
             include_str!("../data/answer.txt")
         );
     }
@@ -14,9 +14,9 @@ mod tests {
 
 fn main() {
     let start = std::time::Instant::now();
-    let sol = solution::solution(include_str!("../data/input.txt"));
+    let answer = solution::solution(include_str!("../data/input.txt"));
     let duration = start.elapsed();
 
     println!("Done in {:?}", duration);
-    print!("{}", sol);
+    print!("{}", answer.to_string());
 }
