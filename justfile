@@ -17,9 +17,15 @@ validate day:
     if re.fullmatch(r'(0[1-9]|1\d|2[0-5])[a-z]', "{{ day }}") is None:
         sys.exit("'day' must be a two digit number between 01 and 25 followed by a lowercase letter")
 
-@test day: (validate day)
+test day="all":
+    #!sh
     echo -e "${GREEN}Testing solution on example input${NO_COLOR}"
-    cargo test -q -p day{{ day }}
+    if [ "{{ day }}" != "all" ]; then
+        just validate "{{ day }}"
+        cargo test -q -p day{{ day }}
+    else
+        cargo test -q --workspace
+    fi
 
 @run day flags="": (validate day) (test day)
     echo -e "${GREEN}Running solution on puzzle input${NO_COLOR}"
