@@ -22,9 +22,9 @@ test day="all":
     echo -e "${GREEN}Testing solution on example input${NO_COLOR}"
     if [ "{{ day }}" != "all" ]; then
         just validate "{{ day }}"
-        cargo test -q -p day{{ day }}
+        cargo test -q -p day{{ day }} -- --nocapture
     else
-        cargo test -q --workspace
+        cargo test -q --workspace -- --nocapture
     fi
 
 @run day flags="": (validate day) (test day)
